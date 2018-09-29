@@ -3,7 +3,7 @@ class CreateCards < ActiveRecord::Migration[5.2]
     create_table :cards do |t|
       t.string :question
       t.string :answer
-      t.boolean :is_correct, default: false 
+      t.boolean :is_correct, default: false
 
       t.timestamps
     end
