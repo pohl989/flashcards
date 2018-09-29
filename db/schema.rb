@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2018_09_29_200253) do
   create_table "cards", force: :cascade do |t|
     t.string "question"
     t.string "answer"
+    t.boolean "is_correct", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
