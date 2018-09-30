@@ -16,6 +16,8 @@ const backgroundColor = (color) => {
   switch(color){
     case 'green':
       return '#827717'
+    case 'orange':
+     return '#ff5722'
     default:
       return '#ff6f00'
   }

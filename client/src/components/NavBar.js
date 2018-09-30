@@ -41,13 +41,14 @@ class NavBar extends Component {
   render() {
     return (
       <div>
-        <Menu pointing secondary>
+        <Menu pointing secondary color="black">
           <Link to='/'>
             <Menu.Item
               name='home'
               id='home'
               active={this.props.location.pathname === '/'}
-          />
+          >
+          </Menu.Item>
         </Link>
           { this.rightNavItems() }
         </Menu>

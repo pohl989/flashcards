@@ -12,6 +12,8 @@ class Score extends Component {
       <Card fluid>
         <Card.Header><Header textAlign="center" as='h2'>Score</Header></Card.Header>
         <Card.Content>
+          <p>Correct:</p>
+          <p>Incorrect:</p>
 
         </Card.Content>
       </Card>

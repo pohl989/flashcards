@@ -1,5 +1,5 @@
 class Api::CardsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index
     render json: Card.all
