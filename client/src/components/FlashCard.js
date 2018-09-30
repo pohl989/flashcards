@@ -21,8 +21,9 @@ class FlashCard extends React.Component {
   }
 
   handleSubmit = (e) => {
+    const { id } = this.props
     e.preventDefault();
-    this.props.updateCard(this.props.id, this.state.question, this.state.answer);
+    this.props.updateCard(id, this.state.question, this.state.answer);
     this.setState({ isEditing: false, displayAnswer: false })
   }
 
@@ -49,12 +50,6 @@ class FlashCard extends React.Component {
     this.setState({
       isEditing: true 
     })
-  }
-
-
-
-  updateTodo = (id) => {
-
   }
   
   renderFlashCard = () =>  {
@@ -94,11 +89,10 @@ class FlashCard extends React.Component {
   }
 
   renderEdit = () =>  {
-    const { } = this.props;
     return (
         <Card>
-          <Card.Content>
-            <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit}>
+            <Card.Content>
               <Form.Field>
                 <label>Question</label>
                 <input 
@@ -119,28 +113,28 @@ class FlashCard extends React.Component {
                   onChange={this.handleAnswerChange}
                 />
               </Form.Field>
-            </Form>
-          </Card.Content>
-          <Card.Content extra>
-            <div className='ui two buttons'>
-              <Button 
-                basic color='grey'
-                onClick={this.handleExit}
-              >
-                <Icon name='undo' />
-                Undo
-              </Button>
-              <Button 
-                basic 
-                color='blue'
-                type='submit'
-              >
-                <Icon name='save' />
-                Save
-              </Button>
+            </Card.Content>
+            <Card.Content extra>
+              <div className='ui two buttons'>
+                <Button 
+                  basic color='grey'
+                  onClick={this.handleExit}
+                  >
+                  <Icon name='undo' />
+                  Undo
+                </Button>
+                <Button 
+                  basic 
+                  color='blue'
+                  type='submit'
+                  >
+                  <Icon name='save' />
+                  Save
+                </Button>
 
-            </div>
-          </Card.Content>
+              </div>
+            </Card.Content>
+          </Form>
         </Card>
     )
   }
