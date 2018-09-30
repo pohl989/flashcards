@@ -22,7 +22,7 @@ class Home extends Component {
 
   addCard = (question, answer) => {
     let card = { question, answer };
-    fetch('/api/songs', {
+    fetch('/api/cards', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +35,27 @@ class Home extends Component {
         this.setState({ cards: [...cards, card] });
     })
   }
-
+  
+  updateCard = (id, question, answer) => {
+    let card = { id, question, answer };
+    fetch(`/api/cards/${id}`, { 
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(card) 
+    }).then( res => res.json() )
+      .then( card => {
+        let cards = this.state.cards.map( t => {
+          if (t.id === id)
+          return card
+          return t;
+        });
+        this.setState({ cards });
+    })
+  }
+  
   deleteCard = (id) => {
     fetch(`/api/cards/${id}`, { method: 'DELETE' })
       .then( () => {
@@ -44,20 +64,7 @@ class Home extends Component {
       })
     this.componentDidMount()
    }
-
-   updateSong = (id) => {
-    fetch(`/api/cards/${id}`, { method: 'PUT' })
-      .then( res => res.json() )
-      .then( card => {
-        let cards = this.state.cards.map( t => {
-          if (t.id === id)
-            return card
-          return t;
-      });
-      this.setState({ cards });
-    })
-  }
-
+  
   render() {
     
     return(
