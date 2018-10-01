@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Button, Card, Icon } from 'semantic-ui-react';
-
+import FakeLink from '../styledComponents/FakeLink';
 
 
 class FlashCard extends React.Component {
@@ -29,7 +29,7 @@ class FlashCard extends React.Component {
 
   handleExit = (e) => {
     e.preventDefault();
-    this.setState({ question: this.props.question, answer: this.props.answer, isEditing: false })
+    this.setState({ question: this.props.question, answer: this.props.answer, isEditing: false, displayAnswer: false })
   }
 
   toggleIsEditing(){
@@ -42,7 +42,7 @@ class FlashCard extends React.Component {
   toggleDisplayAnswer(){
     const { displayAnswer } = this.state;
     this.setState({
-      displayAnswer:!displayAnswer
+      displayAnswer: !displayAnswer
     })
   }
 
@@ -55,9 +55,8 @@ class FlashCard extends React.Component {
   renderFlashCard = () =>  {
     const { question, id, answer, deleteCard } = this.props;
     return (
-      <Card>
+      <Card fluid>
       <Card.Content>
-        <Card.Header>{question}
         <Button.Group floated="right" size="mini">
           <Button 
             icon='pencil' 
@@ -68,18 +67,25 @@ class FlashCard extends React.Component {
             onClick={() => deleteCard(id)}
           />
         </Button.Group >
+        <Card.Header>{question}
         </Card.Header>
         <Card.Description>
-          <span>Reveal Answer</span>
-          <span>{answer}</span>
+          <FakeLink
+            onClick={() => this.toggleDisplayAnswer()}
+            >
+              {this.state.displayAnswer ? "Hide" : "Display"} Answer
+          </FakeLink>
+            <h5>{this.state.displayAnswer ? answer : ""}</h5>
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
         <div className='ui two buttons'>
           <Button basic color='green'>
+            <Icon name='check' />
             Correct
           </Button>
           <Button basic color='red'>
+            <Icon name='ban' />
             Incorrect
           </Button>
         </div>
@@ -90,51 +96,53 @@ class FlashCard extends React.Component {
 
   renderEdit = () =>  {
     return (
-        <Card>
-          <Form onSubmit={this.handleSubmit}>
-            <Card.Content>
-              <Form.Field>
-                <label>Question</label>
-                <input 
-                  id="bestInputEver"
-                  placeholder='Question' 
-                  required
-                  autoFocus
-                  value={this.state.question}
-                  onChange={this.handleQuestionChange}
-                />
-              </Form.Field>
-              <Form.Field>
-                <label>Answer</label>
-                <input 
-                  required
-                  placeholder='Answer' 
-                  value={this.state.answer}
-                  onChange={this.handleAnswerChange}
-                />
-              </Form.Field>
-            </Card.Content>
-            <Card.Content extra>
-              <div className='ui two buttons'>
-                <Button 
-                  basic color='grey'
-                  onClick={this.handleExit}
-                  >
-                  <Icon name='undo' />
-                  Undo
-                </Button>
-                <Button 
-                  basic 
-                  color='blue'
-                  type='submit'
-                  >
-                  <Icon name='save' />
-                  Save
-                </Button>
+        <Card fluid>
+          <Card.Content>
+            <Form onSubmit={this.handleSubmit}>
+              <Card.Content>
+                <Form.Field>
+                  <label>Question</label>
+                  <input 
+                    id="bestInputEver"
+                    placeholder='Question' 
+                    required
+                    autoFocus
+                    value={this.state.question}
+                    onChange={this.handleQuestionChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>Answer</label>
+                  <input 
+                    required
+                    placeholder='Answer' 
+                    value={this.state.answer}
+                    onChange={this.handleAnswerChange}
+                  />
+                </Form.Field>
+              </Card.Content>
+              <Card.Content extra>
+                <div className='ui two buttons'>
+                  <Button 
+                    basic color='grey'
+                    onClick={this.handleExit}
+                    >
+                    <Icon name='undo' />
+                    Undo
+                  </Button>
+                  <Button 
+                    basic 
+                    color='blue'
+                    type='submit'
+                    >
+                    <Icon name='save' />
+                    Save
+                  </Button>
 
-              </div>
-            </Card.Content>
-          </Form>
+                </div>
+              </Card.Content>
+            </Form>
+          </Card.Content>
         </Card>
     )
   }

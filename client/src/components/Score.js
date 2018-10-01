@@ -4,17 +4,20 @@ import { Card, Header } from 'semantic-ui-react';
 class Score extends Component {
 
   state = {
-    correct: '',
-    incorrect: ''
+    correct: '0',
+    incorrect: '0'
   }
   render() {
     return (
       <Card fluid>
         <Card.Header><Header textAlign="center" as='h2'>Score</Header></Card.Header>
         <Card.Content>
-          <p>Correct:</p>
-          <p>Incorrect:</p>
-
+          <p>
+            Correct: {this.state.correct}         
+          </p>
+          <p>
+            Incorrect: {this.state.incorrect}
+          </p>
         </Card.Content>
       </Card>
     )
