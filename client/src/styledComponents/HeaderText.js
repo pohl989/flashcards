@@ -28,9 +28,8 @@ const subHeader = (sub=false) => {
     return "0px 0px 15px 0px"
   } else {
     return "15px 0px 5px 0px"
-  }  
+  }
 }
-
 
 export default styled.h1`
   margin: ${props => subHeader(props.sub)};

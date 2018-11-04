@@ -2,17 +2,31 @@ import React, {Component} from 'react';
 import { Grid, Divider } from 'semantic-ui-react';
 import HeaderText from '../styledComponents/HeaderText';
 import CardForm from './CardForm';
-import Score from './Score';
+import ScoreBoard from './ScoreBoard';
 import CardList from './CardList'
 
 
 class Home extends Component {
 
-  state = { cards: [
-    {id: 1, question: "The best Song Ever", answer: "Cool Artist", is_correct: false, isEditing: false}, 
-    {id: 2, question: "Another Great Song", answer: "Sum42", is_correct: false, isEditing: false}, 
-    {id: 3, question: "Lemon Ginger", answer: "Mamachari", is_correct: false, isEditing: false},
-  ]}
+  state = { 
+    cards: [
+      {id: 1, question: "The best Song Ever", answer: "Cool Artist", is_correct: false, isEditing: false}, 
+      {id: 2, question: "Another Great Song", answer: "Sum42", is_correct: false, isEditing: false}, 
+      {id: 3, question: "Lemon Ginger", answer: "Mamachari", is_correct: false, isEditing: false},
+    ],
+    correct: 0,
+    incorrect: 0,
+  }
+
+  correctAnswer = () => {
+    const correct = this.state.correct
+    this.setState({ correct: correct + 1})
+  }
+
+  incorrectAnswer = () => {
+    const incorrect = this.state.incorrect
+    this.setState({ incorrect: incorrect + 1})
+  }
 
   componentDidMount() {
     fetch('/api/cards')
@@ -85,7 +99,10 @@ class Home extends Component {
               </Grid.Row>
             </Grid.Column>
             <Grid.Column width={4}>
-            <Score/>
+            <ScoreBoard
+              correct={this.state.correct}
+              incorrect={this.state.incorrect}
+            />
             </Grid.Column>
           </Grid.Row>
           <Divider />
@@ -97,6 +114,8 @@ class Home extends Component {
                   cards={this.state.cards}
                   updateCard={this.updateCard} 
                   deleteCard={this.deleteCard}
+                  correctAnswer={this.correctAnswer}
+                  incorrectAnswer={this.incorrectAnswer}
                 />
               </Grid.Row>
             </Grid.Column>
