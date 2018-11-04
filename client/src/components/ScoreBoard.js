@@ -19,12 +19,10 @@ class ScoreBoard extends Component {
       </Card>
     )
   }
-
-
 }
 
 const mapStateToProps = state => {
-  return { score: state.score };
+  return { correct: state.correct, incorrect: state.incorrect };
 };
 
 export default connect(mapStateToProps)(ScoreBoard)

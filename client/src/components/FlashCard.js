@@ -1,7 +1,9 @@
 import React from 'react'
 import { Form, Button, Card, Icon } from 'semantic-ui-react';
 import FakeLink from '../styledComponents/FakeLink';
-
+import { correct } from '../reducers/correct'
+import { incorrect } from '../reducers/incorrect'
+import { connect } from 'react-redux'
 
 class FlashCard extends React.Component {
   
@@ -53,7 +55,7 @@ class FlashCard extends React.Component {
   }
   
   renderFlashCard = () =>  {
-    const { question, id, answer, deleteCard, correctAnswer, incorrectAnswer } = this.props;
+    const { question, id, answer, deleteCard, dispatch } = this.props;
     return (
       <Card fluid>
       <Card.Content>
@@ -81,15 +83,18 @@ class FlashCard extends React.Component {
       <Card.Content extra>
         <div className='ui two buttons'>
           <Button 
-          onClick={() => correctAnswer}
-          basic 
+            onClick={() => dispatch({
+              type: 'CORRECT_ANSWER'
+              })}            basic 
           color='green'
           >
             <Icon name='check' />
             Correct
           </Button>
           <Button 
-            onClick={() => incorrectAnswer}
+            onClick={() => dispatch({
+              type: 'INCORRECT_ANSWER'
+              })}
             basic 
             color='red'
           >
@@ -161,4 +166,4 @@ class FlashCard extends React.Component {
     return( this.state.isEditing ? this.renderEdit() : this.renderFlashCard())
   }
 }
-export default FlashCard;
+export default connect()(FlashCard);

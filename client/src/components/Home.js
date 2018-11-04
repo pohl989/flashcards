@@ -5,7 +5,6 @@ import CardForm from './CardForm';
 import ScoreBoard from './ScoreBoard';
 import CardList from './CardList'
 
-
 class Home extends Component {
 
   state = { 
@@ -14,8 +13,6 @@ class Home extends Component {
       {id: 2, question: "Another Great Song", answer: "Sum42", is_correct: false, isEditing: false}, 
       {id: 3, question: "Lemon Ginger", answer: "Mamachari", is_correct: false, isEditing: false},
     ],
-    correct: 0,
-    incorrect: 0,
   }
 
   correctAnswer = () => {
@@ -114,8 +111,6 @@ class Home extends Component {
                   cards={this.state.cards}
                   updateCard={this.updateCard} 
                   deleteCard={this.deleteCard}
-                  correctAnswer={this.correctAnswer}
-                  incorrectAnswer={this.incorrectAnswer}
                 />
               </Grid.Row>
             </Grid.Column>

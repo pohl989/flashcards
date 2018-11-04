@@ -6,7 +6,7 @@ import { Card, Container } from 'semantic-ui-react';
 class CardList extends React.Component {
 
   render() {
-    const {deleteCard, updateCard, cards, correctAnswer, incorrectAnswer} = this.props;
+    const {deleteCard, updateCard, cards} = this.props;
 
     return (
       <div className="row">
@@ -18,8 +18,6 @@ class CardList extends React.Component {
                 {...single}
                 updateCard={updateCard}
                 deleteCard={deleteCard}
-                correctAnswer={correctAnswer}
-                incorrectAnswer={incorrectAnswer}
               />
             )}
           </Card.Group>
