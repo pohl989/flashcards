@@ -53,7 +53,7 @@ class FlashCard extends React.Component {
   }
   
   renderFlashCard = () =>  {
-    const { question, id, answer, deleteCard } = this.props;
+    const { question, id, answer, deleteCard, correctAnswer, incorrectAnswer } = this.props;
     return (
       <Card fluid>
       <Card.Content>
@@ -80,11 +80,19 @@ class FlashCard extends React.Component {
       </Card.Content>
       <Card.Content extra>
         <div className='ui two buttons'>
-          <Button basic color='green'>
+          <Button 
+          onClick={() => correctAnswer}
+          basic 
+          color='green'
+          >
             <Icon name='check' />
             Correct
           </Button>
-          <Button basic color='red'>
+          <Button 
+            onClick={() => incorrectAnswer}
+            basic 
+            color='red'
+          >
             <Icon name='ban' />
             Incorrect
           </Button>

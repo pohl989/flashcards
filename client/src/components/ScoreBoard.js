@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux';
 import { Card, Header } from 'semantic-ui-react';
 
 class ScoreBoard extends Component {
@@ -22,4 +23,8 @@ class ScoreBoard extends Component {
 
 }
 
-export default ScoreBoard
+const mapStateToProps = state => {
+  return { score: state.score };
+};
+
+export default connect(mapStateToProps)(ScoreBoard)
