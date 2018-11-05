@@ -12,7 +12,21 @@ class FlashCard extends React.Component {
     displayAnswer: false,
     question: this.props.question,
     answer: this.props.answer,
+    status: ""
   }
+
+  correctAnswer = () => {
+    const {dispatch} = this.props
+    dispatch({type: 'CORRECT_ANSWER'})
+    this.setState({ status: "correct", displayAnswer: false });
+  }
+
+  incorrectAnswer = () => {
+    const {dispatch} = this.props
+    dispatch({type: 'INCORRECT_ANSWER'})
+    this.setState({ status: "incorrect", displayAnswer: false });
+  }
+
 
   handleQuestionChange = (e) => {
     this.setState({ question: e.target.value });
@@ -53,11 +67,64 @@ class FlashCard extends React.Component {
       isEditing: true 
     })
   }
+
+  showTheCorrectButton = () => {
+    const {status} = this.state
+    if(status==="correct") {
+      return(
+        <Button
+          onClick={() => this.correctAnswer()}            
+          color='green'
+        >
+          <Icon name='check' />
+          Correct
+        </Button>
+      )
+    } else {
+      return(
+        <Button
+          onClick={() => this.correctAnswer()}            
+          basic 
+          color='green'
+        >
+          <Icon name='check' />
+          Correct
+        </Button>
+      )
+    }
+  }
+
+  showTheIncorrectButton = () => {
+    const {status} = this.state
+    if(status==="incorrect") {
+      return(
+        <Button 
+          onClick={() => this.incorrectAnswer()}
+          color='red'
+        >
+        <Icon name='ban' />
+          Incorrect
+        </Button>
+      )
+    } else {
+      return(
+        <Button 
+        onClick={() => this.incorrectAnswer()}
+        basic 
+        color='red'
+      >
+        <Icon name='ban' />
+        Incorrect
+      </Button>
+      )
+    }
+  }
   
   renderFlashCard = () =>  {
-    const { question, id, answer, deleteCard, dispatch } = this.props;
+    const { question, id, answer, deleteCard } = this.props;
+    const { status } = this.state
     return (
-      <Card fluid>
+      <Card fluid inverted>
       <Card.Content>
         <Button.Group floated="right" size="mini">
           <Button 
@@ -82,25 +149,8 @@ class FlashCard extends React.Component {
       </Card.Content>
       <Card.Content extra>
         <div className='ui two buttons'>
-          <Button 
-            onClick={() => dispatch({
-              type: 'CORRECT_ANSWER'
-              })}            basic 
-          color='green'
-          >
-            <Icon name='check' />
-            Correct
-          </Button>
-          <Button 
-            onClick={() => dispatch({
-              type: 'INCORRECT_ANSWER'
-              })}
-            basic 
-            color='red'
-          >
-            <Icon name='ban' />
-            Incorrect
-          </Button>
+          {this.showTheCorrectButton()}
+          {this.showTheIncorrectButton()}
         </div>
       </Card.Content>
     </Card>
