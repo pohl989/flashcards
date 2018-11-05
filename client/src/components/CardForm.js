@@ -35,7 +35,7 @@ class CardForm extends Component {
               placeholder='Question' 
               required
               autoFocus
-              value={this.state.title}
+              value={this.state.question}
               onChange={this.handleQuestionChange}
             />
           </Form.Field>
@@ -44,7 +44,7 @@ class CardForm extends Component {
             <input 
               required
               placeholder='Answer' 
-              value={this.state.artist}
+              value={this.state.answer}
               onChange={this.handleAnswerChange}
             />
           </Form.Field>

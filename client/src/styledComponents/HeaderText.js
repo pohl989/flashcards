@@ -36,4 +36,5 @@ export default styled.h1`
   text-align: center;
   font-size: ${props => fontSize(props.fSize)} !important;
   background-color: ${props => backgroundColor(props.bColor)} !important;
+  color: black;
 `

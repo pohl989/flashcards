@@ -124,7 +124,7 @@ class FlashCard extends React.Component {
     const { question, id, answer, deleteCard } = this.props;
     const { status } = this.state
     return (
-      <Card fluid inverted>
+      <Card fluid>
       <Card.Content>
         <Button.Group floated="right" size="mini">
           <Button 
@@ -162,7 +162,7 @@ class FlashCard extends React.Component {
         <Card fluid>
           <Card.Content>
             <Form onSubmit={this.handleSubmit}>
-              <Card.Content>
+              <Card.Description>
                 <Form.Field>
                   <label>Question</label>
                   <input 
@@ -183,7 +183,7 @@ class FlashCard extends React.Component {
                     onChange={this.handleAnswerChange}
                   />
                 </Form.Field>
-              </Card.Content>
+                </Card.Description>
               <Card.Content extra>
                 <div className='ui two buttons'>
                   <Button 
@@ -201,7 +201,6 @@ class FlashCard extends React.Component {
                     <Icon name='save' />
                     Save
                   </Button>
-
                 </div>
               </Card.Content>
             </Form>

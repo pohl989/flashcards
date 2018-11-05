@@ -4,6 +4,7 @@ import HeaderText from '../styledComponents/HeaderText';
 import CardForm from './CardForm';
 import ScoreBoard from './ScoreBoard';
 import CardList from './CardList'
+import { Link } from 'react-router-dom'
 
 class Home extends Component {
 
@@ -43,7 +44,7 @@ class Home extends Component {
     }).then( res => res.json() )
       .then( card => {
         const { cards } = this.state;
-        this.setState({ cards: [...cards, card] });
+        this.setState({ cards: [card, ...cards] });
     })
   }
   
@@ -80,9 +81,12 @@ class Home extends Component {
     
     return(
       <div>
+          <Link to='/'>
+            <HeaderText bColor="green" fSize="large">
+              Flash Cards
+            </HeaderText>
+          </Link>
 
-        <HeaderText bColor="green" fSize="large">Flash Cards
-        </HeaderText>
         <HeaderText sub={true} fSize="small" >Now Lets get flashy</HeaderText>
     
         <Grid inverted>

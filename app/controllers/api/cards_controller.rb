@@ -2,7 +2,7 @@ class Api::CardsController < ApplicationController
   # before_action :authenticate_user!
 
   def index
-    render json: Card.all
+    render json: Card.all.order(created_at: :desc)
   end
 
   def create

@@ -4,16 +4,29 @@ import { Card, Header } from 'semantic-ui-react';
 
 class ScoreBoard extends Component {
 
+  percentage = () => {
+    const { correct, incorrect} = this.props
+    if (correct + incorrect == 0) {
+      return("0.00%")
+    } else {
+      return(`${(correct/(correct + incorrect) * 100).toFixed(2)}%`)
+    }
+  }
+
   render() {
+    const { correct, incorrect} = this.props
     return (
       <Card fluid>
         <Card.Header><Header textAlign="center" as='h2'>Score</Header></Card.Header>
         <Card.Content>
           <p>
-            Correct: {this.props.correct}         
+            Correct: {correct}     
           </p>
           <p>
-            Incorrect: {this.props.incorrect}
+            Incorrect: {incorrect}
+          </p>
+          <p>
+            Percentage: {this.percentage()}
           </p>
         </Card.Content>
       </Card>
