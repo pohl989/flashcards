@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import { Grid, Divider } from 'semantic-ui-react';
+import React, {Component, Fragment} from 'react';
+import { Grid, Divider, Button, Header } from 'semantic-ui-react';
 import HeaderText from '../styledComponents/HeaderText';
 import CardForm from './CardForm';
 import ScoreBoard from './ScoreBoard';
@@ -14,6 +14,8 @@ class Home extends Component {
       {id: 2, question: "Another Great Song", answer: "Sum42", is_correct: false, isEditing: false}, 
       {id: 3, question: "Lemon Ginger", answer: "Mamachari", is_correct: false, isEditing: false},
     ],
+    showForm: false,
+    showButtons: true,
   }
 
   correctAnswer = () => {
@@ -76,6 +78,61 @@ class Home extends Component {
       })
     this.componentDidMount()
    }
+
+  renderForm = () => {
+    const { showForm } = this.state
+    if(showForm) {
+      return (
+        <Grid.Row>
+          <CardForm addCard={this.addCard} />
+        </Grid.Row>
+      )
+    } else {
+      return (
+        <Grid.Row>
+          <ScoreBoard
+            correct={this.state.correct}
+            incorrect={this.state.incorrect}
+          />
+        </Grid.Row>
+      )
+    }
+  }
+
+  renderButtons = () => {
+    const { showButtons } = this.state
+    if(showButtons) {
+      return (
+        <Fragment>
+          <Header>Select a Category</Header>
+          <Button.Group fluid inverted>
+            <Button inverted color={"blue"}>Rails</Button>
+            <Button inverted color={"blue"}>React</Button>
+            <Button inverted color={"blue"}>ES6</Button>
+          </Button.Group>
+          <Header>How Many Cards</Header>
+          <Button.Group fluid inverted>
+            <Button inverted color={"blue"}>5</Button>
+            <Button inverted color={"blue"}>10</Button>
+            <Button inverted color={"blue"}>15</Button>
+            <Button inverted color={"blue"}>all</Button>
+          </Button.Group>
+          <Divider />
+          <Button fluid color={"pink"}>Let the games begin</Button>          
+        </Fragment>
+      )
+    } else {
+      return (
+        <Grid.Row>
+          <ScoreBoard
+            correct={this.state.correct}
+            incorrect={this.state.incorrect}
+          />
+        </Grid.Row>
+      )
+    }
+  }
+
   
   render() {
     
@@ -92,18 +149,12 @@ class Home extends Component {
         <Grid inverted>
           <Grid.Row>
             <Grid.Column width={2}/>
-            <Grid.Column width={8}>
-              <Grid.Row>
-                <CardForm
-                  addCard={this.addCard}
-                />
-              </Grid.Row>
-            </Grid.Column>
+              <Grid.Column width={8}>
+                {this.renderForm()}
+                {this.renderButtons()}
+              </Grid.Column>
             <Grid.Column width={4}>
-            <ScoreBoard
-              correct={this.state.correct}
-              incorrect={this.state.incorrect}
-            />
+   
             </Grid.Column>
           </Grid.Row>
           <Divider />
