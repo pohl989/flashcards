@@ -1,5 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import { Grid, Divider, Button, Header } from 'semantic-ui-react';
+import { connect } from 'react-redux'
+import { setCategory } from '../reducers/category'
+
 import HeaderText from '../styledComponents/HeaderText';
 import CardForm from './CardForm';
 import ScoreBoard from './ScoreBoard';
@@ -29,6 +32,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    setCategory("taco")
     fetch('/api/cards')
       .then( res => res.json() )
       .then( cards => this.setState({ cards }) )
@@ -99,17 +103,53 @@ class Home extends Component {
     }
   }
 
+  category = (Category) => {
+    const { dispatch } = this.props
+    dispatch(setCategory(Category))
+   }
+
   renderButtons = () => {
     const { showButtons } = this.state
+    
+
     if(showButtons) {
       return (
         <Fragment>
           <Header>Select a Category</Header>
           <Button.Group fluid inverted>
-            <Button inverted color={"blue"}>Rails</Button>
-            <Button inverted color={"blue"}>React</Button>
-            <Button inverted color={"blue"}>ES6</Button>
-          </Button.Group>
+            <Button onClick={ () => {
+              this.props.dispatch({
+                type: 'SET_CATEGORY',
+                category: 'Rails'
+              });
+            }}
+              inverted 
+              color={"blue"}
+            >
+              Rails
+            </Button>
+            <Button onClick={ () => {
+              this.props.dispatch({
+                type: 'SET_CATEGORY',
+                category: 'Redux'
+              });
+            }}
+              inverted 
+              color={"blue"}
+            >
+              Redux
+            </Button>     
+            <Button onClick={ () => {
+              this.props.dispatch({
+                type: 'SET_CATEGORY',
+                category: 'React'
+              });
+            }}
+              inverted 
+              color={"blue"}
+            >
+              React
+            </Button>          </Button.Group>
           <Header>How Many Cards</Header>
           <Button.Group fluid inverted>
             <Button inverted color={"blue"}>5</Button>
@@ -135,7 +175,6 @@ class Home extends Component {
 
   
   render() {
-    
     return(
       <div>
           <Link to='/'>
@@ -179,4 +218,8 @@ class Home extends Component {
 }
 
 
-export default Home;
+const mapStateToProps = (state) => {
+  return { category: state.category }
+}
+
+export default connect(mapStateToProps)(Home);
